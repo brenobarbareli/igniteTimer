@@ -28,7 +28,7 @@ interface NewCycleFormData {
 type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 export function Home() {
-  const { register, handleSubmit, watch } = useForm<NewCycleFormData>({
+  const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: {
       task: '',
@@ -38,6 +38,7 @@ export function Home() {
 
   function handleCreateNewCicle(data: NewCycleFormData) {
     console.log(data)
+    reset() /*sempre volta o valor original para o default values definidos anteriormente*/
   }
   const task = watch('task')
   const isSubmitDisabled = !task
